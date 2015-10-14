@@ -1,7 +1,7 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 22
@@ -61,49 +61,6 @@ android {
 tasks.whenTaskAdded { task ->
     if( task instanceof org.gradle.api.publish.maven.tasks.GenerateMavenPom ) {
         task.dependsOn assemble
-    }
-}
-
-
-publishing {
-    publications { 
-        release(MavenPublication) {
-            artifactId "tess-two"
-            groupId "com.googlecode.tesseract.android"
-            artifact "build/outputs/aar/tess-two-release.aar"
-            version "5.2.0-SNAPSHOT"
-            pom {
-                packaging "aar"
-            }
-        }
-        debug(MavenPublication) {
-            artifactId "tess-two-debug"
-            groupId "com.googlecode.tesseract.android"
-            artifact "build/outputs/aar/tess-two-debug.aar"
-            version "5.2.0-SNAPSHOT"
-            pom {
-                packaging "aar"
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name "tess-two-releases"
-            url "${mavenReleases}"
-            credentials(PasswordCredentials) {
-                username mavenReleasesUsername
-                password mavenReleasesPassword
-            }
-        }
-        maven {
-            name "tess-two-snapshots"
-            url "${mavenSnapshots}"
-            credentials(PasswordCredentials) {
-                username mavenSnapshotsUsername
-                password mavenSnapshotsPassword
-            }
-        }
     }
 }
 

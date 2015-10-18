@@ -31,7 +31,7 @@ android {
 
     // call regular ndk-build(.cmd) script from app directory
     task ndkBuild(type: Exec) {
-        workingDir = file("${android.sdkDirectory}/ndk-bundle")
+        workingDir = file("${android.sdkDirectory}/ndk")
             if (Os.isFamily(Os.FAMILY_WINDOWS)) {
                 commandLine 'ndk-build.cmd', '-C', file('.').absolutePath
             } else {
@@ -45,7 +45,7 @@ android {
 
     // cleanup task
     task ndkClean(type: Exec) {
-        workingDir = file("${android.sdkDirectory}/ndk-bundle")
+        workingDir = file("${android.sdkDirectory}/ndk")
             if (Os.isFamily(Os.FAMILY_WINDOWS)) {
                 commandLine 'ndk-build.cmd', '-C', file('.').absolutePath, 'clean'
             } else {
